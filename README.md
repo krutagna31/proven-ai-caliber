@@ -1,6 +1,6 @@
-# Next.js Template
+# Proven AI
 
-A starter template repository with next.js using app router, pre-configured with typescript, tailwind css and shadcn/ui.
+Proven AI is a platform for managing pharmaceutical tasks, master data, and document workflows.
 
 ## Table of contents
 
@@ -17,13 +17,13 @@ Follow these steps to get a copy of the project up and running on your local mac
 ### Cloning the repository
 
 ```sh
-git clone https://github.com/krutagna31/nextjs-template.git
+git clone https://github.com/krutagna31/proven-ai-caliber.git
 ```
 
 ### Installing dependencies
 
 ```sh
-cd nextjs-template
+cd proven-ai-caliber
 npm install
 ```
 
