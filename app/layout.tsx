@@ -9,9 +9,9 @@ const josefinSans = Josefin_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Next.js Template",
+  title: "Proven AI",
   description:
-    "A starter template repository with next.js using app router, pre-configured with typescript, tailwind css and shadcn/ui.",
+    "Proven AI is a platform for managing pharmaceutical tasks, master data, and document workflows.",
 };
 
 export default function HomeLayout({
