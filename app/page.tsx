@@ -1,11 +1,10 @@
-import { SectionContainer, ViewContainer } from "@/components/layouts";
+import { Hero, HomeHeader } from "@/app/_components";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <SectionContainer>
-      <ViewContainer>
-        <h1>Home Page</h1>
-      </ViewContainer>
-    </SectionContainer>
-  )
+    <>
+      <HomeHeader />
+      <Hero />
+    </>
+  );
 }
