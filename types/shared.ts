@@ -1,3 +1,5 @@
+export type Client = "sunpharma";
+
 export type Option<T> = {
   label: string;
   value: T;
@@ -22,6 +24,13 @@ export type SelectInput<T extends string = string> = BaseInput<T> & {
   options: Option<string>[];
 };
 
+export type MultiSelectInput<T extends string = string> = BaseInput<T> & {
+  id: string;
+  type: "multi-select";
+  placeholder: string;
+  options: Option<string>[];
+};
+
 export type TextInput<T extends string = string> = BaseInput<T> & {
   id: string;
   placeholder: string;
@@ -31,4 +40,5 @@ export type TextInput<T extends string = string> = BaseInput<T> & {
 export type FormInput<T extends string = string> =
   | FileInput<T>
   | SelectInput<T>
+  | MultiSelectInput<T>
   | TextInput<T>;

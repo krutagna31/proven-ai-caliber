@@ -54,10 +54,7 @@ export default function LoginPage() {
     },
   });
 
-  const onSubmit = ({
-    userId,
-    password,
-  }: z.infer<typeof formSchema>): void => {
+  const onSubmit = ({ userId, password }: z.infer<typeof formSchema>): void => {
     console.log(userId, password);
   };
 
@@ -67,10 +64,7 @@ export default function LoginPage() {
         <Card>
           <CardHeader>
             <CardTitle>Login to your account</CardTitle>
-            <CardDescription>
-              Please enter user id and password, then select your module and
-              client.
-            </CardDescription>
+            <CardDescription>Please enter user id and password</CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             <form
