@@ -11,19 +11,11 @@ import {
   SidebarTrigger,
 } from "@/components/ui";
 import { ModeToggle } from "@/components/mode-toggle";
-import { clients, modules } from "@/content";
-import { SelectInput, Workspace } from "@/types";
+import { clients } from "@/content";
+import { Client, SelectInput } from "@/types";
+import { useClient } from "@/context";
 
-const selectInputs: SelectInput<keyof Workspace>[] = [
-  {
-    id: "module",
-    name: "module",
-    label: "Module",
-    type: "select",
-    description: "This is your module",
-    placeholder: "Select Module",
-    options: modules,
-  },
+const selectInputs: SelectInput<"client">[] = [
   {
     id: "client",
     name: "client",
@@ -36,10 +28,10 @@ const selectInputs: SelectInput<keyof Workspace>[] = [
 ];
 
 function AppHeader() {
-  const { workspace, setWorkspace } = useWorkspace();
+  const { client, setClient } = useClient();
 
   return (
-    <header className="sticky top-0 border-b bg-inherit py-2 z-10">
+    <header className="sticky top-0 z-10 border-b bg-inherit py-2">
       <ViewContainer className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <SidebarTrigger />
@@ -51,10 +43,8 @@ function AppHeader() {
                 </Label>
                 <Select
                   name={name}
-                  value={workspace[name]}
-                  onValueChange={(val) =>
-                    setWorkspace({ ...workspace, [name]: val })
-                  }
+                  value={client}
+                  onValueChange={(val: Client) => setClient(val)}
                 >
                   <SelectTrigger id={id} size="sm">
                     <SelectValue placeholder={placeholder} />
