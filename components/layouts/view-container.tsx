@@ -11,7 +11,7 @@ const viewContainerVariants = cva("mx-auto px-4", {
     },
   },
   defaultVariants: {
-    size: "default",
+    size: "full",
   },
 });
 
