@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Josefin_Sans } from "next/font/google";
 import { ThemeProvider } from "@/context";
-import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
 
 const josefinSans = Josefin_Sans({
@@ -28,8 +27,7 @@ export default function HomeLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <SiteHeader />
-          <main>{children}</main>
+          {children}
         </ThemeProvider>
       </body>
     </html>
