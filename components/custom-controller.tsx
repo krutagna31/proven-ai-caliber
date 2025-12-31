@@ -5,6 +5,7 @@ import {
   FieldError,
   FieldLabel,
   Input,
+  MultiSelect,
   Select,
   SelectContent,
   SelectItem,
@@ -76,6 +77,30 @@ function CustomController<T extends FieldValues>({
                 ))}
               </SelectContent>
             </Select>
+            <FieldDescription>{formInput.description}</FieldDescription>
+            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+          </Field>
+        )}
+      />
+    );
+  }
+
+  if (formInput.type === "multi-select") {
+    return (
+      <Controller
+        name={formInput.name}
+        control={form.control}
+        render={({ field, fieldState }) => (
+          <Field data-invalid={fieldState.invalid}>
+            <FieldLabel htmlFor={formInput.id}>{formInput.label}</FieldLabel>
+            <MultiSelect
+              id={formInput.id}
+              name={formInput.name}
+              aria-invalid={fieldState.invalid}
+              options={formInput.options}
+              onValueChange={field.onChange}
+              defaultValue={field.value}
+            />
             <FieldDescription>{formInput.description}</FieldDescription>
             {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
           </Field>
