@@ -1,6 +1,9 @@
 "use client";
 
-import { CustomController } from "@/components/custom-controller";
+import Link from "next/link";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { SectionContainer, ViewContainer } from "@/components/layouts";
 import {
   Button,
@@ -11,11 +14,9 @@ import {
   CardTitle,
   FieldGroup,
 } from "@/components/ui";
-import { FormInput } from "@/types";
-import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
+import { CustomController } from "@/components/custom-controller";
+import { clients } from "@/content/shared";
+import type { FormInput } from "@/types";
 
 const formSchema = z.object({
   userId: z.string().refine((val) => val.trim().length > 0, {
@@ -25,6 +26,9 @@ const formSchema = z.object({
   password: z.string().refine((val) => val.trim().length > 0, {
     message: "Password is required",
   }),
+  client: z
+    .array(z.enum(clients.map((client) => client.value)))
+    .min(1, { message: "Client is required" }),
 });
 
 const formInputs: FormInput<keyof z.infer<typeof formSchema>>[] = [
@@ -52,6 +56,15 @@ const formInputs: FormInput<keyof z.infer<typeof formSchema>>[] = [
     placeholder: "",
     description: "This is your password",
   },
+  {
+    id: "form-register-client",
+    name: "client",
+    label: "Client",
+    type: "multi-select",
+    placeholder: "Select client",
+    description: "This is your client",
+    options: clients,
+  },
 ];
 
 export default function RegisterPage() {
@@ -59,12 +72,19 @@ export default function RegisterPage() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       userId: "",
+      email: "",
       password: "",
+      client: [],
     },
   });
 
-  const onSubmit = ({ userId, password }: z.infer<typeof formSchema>): void => {
-    console.log(userId, password);
+  const onSubmit = ({
+    userId,
+    email,
+    password,
+    client,
+  }: z.infer<typeof formSchema>): void => {
+    console.log(userId, email, password, client);
   };
 
   return (
@@ -73,7 +93,9 @@ export default function RegisterPage() {
         <Card>
           <CardHeader>
             <CardTitle>Register to your account</CardTitle>
-            <CardDescription>Please enter user id and password</CardDescription>
+            <CardDescription>
+              Enter your details below to register your account
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             <form
