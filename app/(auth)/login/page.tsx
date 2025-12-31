@@ -1,6 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { CustomController } from "@/components/custom-controller";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { SectionContainer, ViewContainer } from "@/components/layouts";
 import {
   Button,
@@ -11,11 +15,8 @@ import {
   CardTitle,
   FieldGroup,
 } from "@/components/ui";
+import { clients } from "@/content/shared";
 import { FormInput } from "@/types";
-import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
 
 const formSchema = z.object({
   userId: z.string().refine((val) => val.trim().length > 0, {
@@ -24,6 +25,12 @@ const formSchema = z.object({
   password: z.string().refine((val) => val.trim().length > 0, {
     message: "Password is required",
   }),
+  client: z.enum(
+    clients.map((client) => client.value),
+    {
+      message: "Client is required",
+    },
+  ),
 });
 
 const formInputs: FormInput<keyof z.infer<typeof formSchema>>[] = [
@@ -43,6 +50,15 @@ const formInputs: FormInput<keyof z.infer<typeof formSchema>>[] = [
     placeholder: "",
     description: "This is your password",
   },
+  {
+    id: "form-login-client",
+    name: "client",
+    label: "Client",
+    type: "select",
+    placeholder: "Select client",
+    description: "This is your client",
+    options: clients,
+  },
 ];
 
 export default function LoginPage() {
@@ -51,6 +67,7 @@ export default function LoginPage() {
     defaultValues: {
       userId: "",
       password: "",
+      client: "sunpharma",
     },
   });
 
