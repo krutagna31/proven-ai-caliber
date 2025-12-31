@@ -15,32 +15,32 @@ import { FormInput } from "@/types";
 
 interface FormInputProps<T extends FieldValues> {
   form: UseFormReturn<T>;
-  input: FormInput<Path<T>>;
+  formInput: FormInput<Path<T>>;
 }
 
 function CustomController<T extends FieldValues>({
   form,
-  input,
+  formInput,
 }: FormInputProps<T>) {
-  if (input.type === "file") {
+  if (formInput.type === "file") {
     return (
       <Controller
         control={form.control}
-        name={input.name}
+        name={formInput.name}
         render={({ field, fieldState }) => (
           <Field data-invalid={fieldState.invalid}>
-            <FieldLabel htmlFor={input.id}>{input.label}</FieldLabel>
+            <FieldLabel htmlFor={formInput.id}>{formInput.label}</FieldLabel>
             <Input
-              id={input.id}
+              id={formInput.id}
               name={field.name}
-              type={input.type}
+              type={formInput.type}
               aria-invalid={fieldState.invalid}
-              accept={input.accept}
+              accept={formInput.accept}
               onChange={(event) => field.onChange(event.target.files)}
               onBlur={field.onBlur}
               ref={field.ref}
             />
-            <FieldDescription>{input.description}</FieldDescription>
+            <FieldDescription>{formInput.description}</FieldDescription>
             {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
           </Field>
         )}
@@ -48,35 +48,35 @@ function CustomController<T extends FieldValues>({
     );
   }
 
-  if (input.type === "select") {
+  if (formInput.type === "select") {
     return (
       <Controller
-        name={input.name}
+        name={formInput.name}
         control={form.control}
         render={({ field, fieldState }) => (
           <Field data-invalid={fieldState.invalid}>
-            <FieldLabel htmlFor={input.id}>{input.label}</FieldLabel>
+            <FieldLabel htmlFor={formInput.id}>{formInput.label}</FieldLabel>
             <Select
               name={field.name}
               value={field.value}
               onValueChange={field.onChange}
             >
               <SelectTrigger
-                id={input.id}
+                id={formInput.id}
                 aria-invalid={fieldState.invalid}
                 className="w-full"
               >
-                <SelectValue placeholder={input.placeholder} />
+                <SelectValue placeholder={formInput.placeholder} />
               </SelectTrigger>
               <SelectContent>
-                {input.options.map(({ label, value }) => (
+                {formInput.options.map(({ label, value }) => (
                   <SelectItem key={value} value={value}>
                     {label}
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
-            <FieldDescription>{input.description}</FieldDescription>
+            <FieldDescription>{formInput.description}</FieldDescription>
             {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
           </Field>
         )}
@@ -86,18 +86,18 @@ function CustomController<T extends FieldValues>({
 
   return (
     <Controller
-      name={input.name}
+      name={formInput.name}
       control={form.control}
       render={({ field, fieldState }) => (
         <Field data-invalid={fieldState.invalid}>
-          <FieldLabel htmlFor={input.id}>{input.label}</FieldLabel>
+          <FieldLabel htmlFor={formInput.id}>{formInput.label}</FieldLabel>
           <Input
             {...field}
-            id={input.id}
-            type={input.type}
+            id={formInput.id}
+            type={formInput.type}
             aria-invalid={fieldState.invalid}
           />
-          <FieldDescription>{input.description}</FieldDescription>
+          <FieldDescription>{formInput.description}</FieldDescription>
           {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
         </Field>
       )}
