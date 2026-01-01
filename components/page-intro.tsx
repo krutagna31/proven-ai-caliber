@@ -16,4 +16,4 @@ function PageIntro({ title, description }: PageIntroProps) {
   );
 }
 
-export { PageIntro };
+export { PageIntro }
