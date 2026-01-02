@@ -1,5 +1,9 @@
+import { TaskUpload } from "@/app/(app)/(master-data)/create/_components";
+
 function InputDocuments() {
-  return <h1>Input Documents</h1>;
+  return (
+    <TaskUpload />
+  )
 }
 
 export { InputDocuments };
