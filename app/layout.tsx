@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Josefin_Sans } from "next/font/google";
 import { ClientProvider, ThemeProvider } from "@/context";
+import { Toaster } from "@/components/ui";
 import "./globals.css";
+import { QueryProvider } from "@/context/query-provider";
 
 const josefinSans = Josefin_Sans({
   subsets: ["latin"],
@@ -27,7 +29,12 @@ export default function HomeLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <ClientProvider>{children}</ClientProvider>
+          <QueryProvider>
+            <ClientProvider>
+              {children}
+              <Toaster position="top-center" />
+            </ClientProvider>
+          </QueryProvider>
         </ThemeProvider>
       </body>
     </html>

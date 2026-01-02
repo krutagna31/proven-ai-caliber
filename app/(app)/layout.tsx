@@ -15,7 +15,7 @@ export default async function DashboardLayout({
       <AppSidebar />
       <SidebarInset className="h-screen overflow-auto">
         <AppHeader />
-        {children}
+        <main>{children}</main>
       </SidebarInset>
     </SidebarProvider>
   );
